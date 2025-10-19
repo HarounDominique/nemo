@@ -1,5 +1,6 @@
 package com.haroun.nemo
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -171,7 +172,8 @@ fun ReportForm() {
         // 8️⃣ Botón de envío
         Button(
             onClick = {
-                // Aquí enviar datos a backend o pasar a la pantalla del mapa
+                val intent = Intent(context, MainActivity::class.java)
+                context.startActivity(intent)
             },
             modifier = Modifier.align(Alignment.End)
         ) {
