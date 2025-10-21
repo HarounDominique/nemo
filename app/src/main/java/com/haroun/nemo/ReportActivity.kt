@@ -66,25 +66,35 @@ fun ReportForm() {
         Text("Reporte de mascota perdida", style = MaterialTheme.typography.titleLarge)
 
         // 1️⃣ Tipo de animal
+        var expandedAnimal by remember { mutableStateOf(false) }
+
         ExposedDropdownMenuBox(
-            expanded = false,
-            onExpandedChange = {}
+            expanded = expandedAnimal,
+            onExpandedChange = { expandedAnimal = !expandedAnimal }
         ) {
             TextField(
                 value = selectedAnimal,
-                onValueChange = { selectedAnimal = it },
-                label = { Text("Tipo de animal") },
+                onValueChange = {},
+                label = { Text("Animal") },
                 readOnly = true,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .menuAnchor()
+                    .fillMaxWidth(),
+                trailingIcon = {
+                    ExposedDropdownMenuDefaults.TrailingIcon(expanded = expandedAnimal)
+                }
             )
-            DropdownMenu(
-                expanded = false,
-                onDismissRequest = {}
+            ExposedDropdownMenu(
+                expanded = expandedAnimal,
+                onDismissRequest = { expandedAnimal = false }
             ) {
                 animalOptions.forEach { animal ->
                     DropdownMenuItem(
                         text = { Text(animal) },
-                        onClick = { selectedAnimal = animal }
+                        onClick = {
+                            selectedAnimal = animal
+                            expandedAnimal = false
+                        }
                     )
                 }
             }
@@ -116,25 +126,35 @@ fun ReportForm() {
         )
 
         // 5️⃣ Actitud
+        var expandedAttitude by remember { mutableStateOf(false) }
+
         ExposedDropdownMenuBox(
-            expanded = false,
-            onExpandedChange = {}
+            expanded = expandedAttitude,
+            onExpandedChange = { expandedAttitude = !expandedAttitude }
         ) {
             TextField(
                 value = attitude,
-                onValueChange = { attitude = it },
+                onValueChange = {},
                 label = { Text("Actitud") },
                 readOnly = true,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .menuAnchor()
+                    .fillMaxWidth(),
+                trailingIcon = {
+                    ExposedDropdownMenuDefaults.TrailingIcon(expanded = expandedAttitude)
+                }
             )
-            DropdownMenu(
-                expanded = false,
-                onDismissRequest = {}
+            ExposedDropdownMenu(
+                expanded = expandedAttitude,
+                onDismissRequest = { expandedAttitude = false }
             ) {
                 attitudeOptions.forEach { a ->
                     DropdownMenuItem(
                         text = { Text(a) },
-                        onClick = { attitude = a }
+                        onClick = {
+                            attitude = a
+                            expandedAttitude = false
+                        }
                     )
                 }
             }
